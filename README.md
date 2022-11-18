@@ -22,17 +22,17 @@
 
 1. NodeJs
 
-2. Mongo
+2. Mongo (Mongoose)
 
-3. Jest
+3. Jest (Unitários e Integração)
 
-4. Express
+4. Supertest (Integração)
 
-5. Typescript
+5. Express
 
-6. Babel
+6. Typescript
 
-7. Supertest
+7. Babel
 
 ## Como instalar
 
@@ -96,6 +96,10 @@ Teste Unitários
   do serviço e um teste de resposta de sucesso
 - Funções de validação ou Função de mensagem de erro. Todas deverão possuir arquivos de teste unitário
 
+Testes
+
+- Pelo menos 80% de cobertura de Testes
+
 Documentação no Postman/Insomnia
 
 - Todos os endpoints deverão estar documentados e exportados em formato link JSON
@@ -106,39 +110,45 @@ Documentação no Postman/Insomnia
 Retorno das Rotas
 
 - GetAll -> Toda a collection
-- GetById -> Apenas o identificado
-- Update -> Apenas o editado
-- Create -> Apenas o criado
+- GetById -> Apenas o objeto identificado
+- Update -> Apenas o editado (É uma opção fazer um endpoint para cada tipo de update)
+- Create -> Apenas o objeto criado
 
 Extras/Opcionais
 
-- Interfacear o Core da aplicação(Models, Repos, Service, Controller)
+- Interfacear o Core da aplicação(Models, Repos, Services, Controller)
   \*(pesquisas sobre inversão de controle/inversão de dependência)
 - Realizar o processo de DI com abstrações ao invés de detalhes
   É a letra D do Solid
 
 5. Entidades e critérios de aceitação específico
 
-Resenhas
+Resenhas (reviews)
 
 - Cada acervo de Resenhas deverá conter um:
 
+MODEL:
 -> Título da Resenha de no máximo 24 caracteres (String) - Obrigatório - Único
 
 -> Resenha: Texto de no máximo 200 caracteres (String[]) - Obrigatório
+arr[0] === Resenha v1
+arr[1] === Resenha v1.1
+arr[2] === Resenha v2.2
 
 -> Data de criação: Formato de Data a sua escolha (new Date) - Obrigatório
 
 -> Data de edição: Array com todas as datas de modificação (new Date[]) - Obrigatório
+arr[0] === new Date v1 (Data de criação)
+arr[1] === new Date v2 (Data de update1)
+arr[1] === new Date v2 (Data de update2)
 
--> Nota do Autor: Um número de 1 a 5 (Number) - Obrigatório
+-> Nota da Obra: Um número de 1 a 5 (Number) - Obrigatório
 
 - Essa API deverá ser capaz de interagir com uma lista(collection) de Resenhas do MONGODB
 
 - Deverá ser possível: Criar, Editar, Listar, Listar por ID
 
 - Não deverá ser possível apagar uma resenha
-  rigatório - Único
 
 - As edições devem ser acumuladas no Array de Resenhas e as datas no Array de datas,
   dessa maneira elas não irão se sobreescrever e serão correspondentes por index
@@ -147,18 +157,25 @@ Resenhas
 
 Livros
 
+Cada Documento de Livro estará relacionado a um documento de Resenha
+
 - Os Livros devem possuir
 
+MODEL:
 ->Título: Texto de no máximo 24 caracteres(Esse título é diferente do título
 da resenha em si) (String) - Obrigatório
 
--> Data de criação: Formato de Data a sua escolha (new Date) - Obrigatório
+-> Data de lançamento: Formato de Data a sua escolha (new Date) - Obrigatório
+(Data que o livro foi lançado)
 
 -> Idiomas disponíveis: Texto de no máximo 18 caracteres por String (String[]) - Obrigatório
 
 -> Status: Campo booleano que indica se o livro é comercializado/Existe (boolean) - Obrigatório
+False -> front end não irá consumir esse dado
+True -> front end irá consumir esse dado
 
 -> Resenha: ID de uma Document de Resenha (ObjectId) - Opcional - Único
+Nem todo livro terá uma Resenha.
 
 -> Autor: Texto de no máximo 24 caracteres (String) - Obrigatório - Único
 
@@ -169,7 +186,8 @@ da resenha em si) (String) - Obrigatório
 - Não deverá ser possível apagar um livro
 
 - Deverá possível alterar apenas o Status, os Idiomas disponíveis do livro e
-  o ID do Documento de Resenhas referentes ao Livro
+  o ID do Documento de Resenhas referentes ao Livro  
+  \*Alterar o Status de um livro por ID deverá ser um endpoint separado
 
 - A Listagem por ID deverá trazer todos dados da Resenha do respectivo livro caso
   ela exista. Caso não exista retorna o Documento em sua estrutura normal
