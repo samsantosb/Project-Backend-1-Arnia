@@ -114,6 +114,10 @@ Retorno das Rotas
 - Update -> Apenas o editado (É uma opção fazer um endpoint para cada tipo de update)
 - Create -> Apenas o objeto criado
 
+Seeder das collections
+
+- Você deverá criar uma função de seeding do banco de dados
+
 Extras/Opcionais
 
 - Interfacear o Core da aplicação(Models, Repos, Services, Controller)
