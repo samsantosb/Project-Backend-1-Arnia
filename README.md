@@ -200,6 +200,6 @@ Nem todo livro terá uma Resenha.
 - Na funcionalidade de Listar, deverá ser possível fazer uma consulta com Query Params
   por autor
 
-O Endpoint GetAll deve conter a opção de buscar por autor usando Route Params*
+O Endpoint GetAll deve conter a opção de buscar por autor usando query Params*
 
 como feito na aula https://github.com/samsantosb/Arnia-Revis-o/blob/main/routes/query.js
